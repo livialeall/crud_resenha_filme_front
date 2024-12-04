@@ -1,0 +1,425 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+/* Resetar estilos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonte e Pesos */
+
+.roboto-light {
+  font-family: "Roboto", system-ui;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", system-ui;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", system-ui;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", system-ui;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", system-ui;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", system-ui;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", system-ui;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", system-ui;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", system-ui;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.righteous-regular {
+  font-family: "Righteous", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+p{
+  font-size: 15px;
+}
+
+.font-size-24{
+  font-size: 24px;
+}
+.font-size-18{
+  font-size: 18px;
+}
+
+.font-size-15{
+  font-size: 15px;
+}
+
+.font-size-12{
+  font-size: 12px;
+}
+
+.font-size-14{
+  font-size: 14px;
+}
+
+.font-size-8{
+  font-size: 8px;
+}
+
+h1{
+  font-family: "Roboto", system-ui;
+  font-weight: 500;
+  font-style: normal;
+}
+/* Variáveis */
+:root {
+  --purple-4-light: #8163ee70;
+  --purple-3: #8163ee;
+  --purple-2: #6a48e6;
+  --purple-1: #4328a3;
+  --purple-0: #322872;
+  --gray-0: #141414;
+  --gray-1:#2B2B2B;
+  --gray-2:#414040;
+  --gray-3:#858585;
+  --gray-4:#555555;
+  --gray-5:#aaaaaafb;
+  --gray-6:#c9c9c9;
+  --gray-7:#dbdbdb;
+  --proporcao-foto:1,196;
+  --padding-container:20px;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit; /* herda a cor do elemento pai */
+}
+
+button,
+input,
+textarea {
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: var(--gray-1);
+}
+
+body {
+  margin: 0;
+  background: var(--gray-2);
+  color: var(--gray-0);
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Backgrounds */
+.gradient-background-light{
+  background: linear-gradient(to right,var(--gray-1),var(--gray-1));
+}
+.gradient-background{
+  background: linear-gradient(to right,var(--gray-1),var(--gray-2));
+}
+
+.background-gray{
+  background-color:var(--gray-2);
+}
+/* Rounded */
+.rounded-full{
+  border-radius:100%;
+}
+
+.rounded-10{
+  border-radius:10px;
+}
+
+.rounded-5{
+  border-radius:5px;
+}
+
+.active {
+  background: linear-gradient(to right,var(--purple-1),var(--purple-2));
+}
+.max-width{
+  max-width: 100%;
+}
+
+/* Divisao da tela */
+.main-div {
+    background-color: var(--gray-7);/* Cor cinza claro */
+}
+.component-div {
+  padding: var(--padding-container); /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  background-color: var(--gray-7);/* Cor cinza claro */
+  box-shadow: 1px 1px 10px rgb(17, 17, 17);
+  margin: 4% 0px;
+}
+
+.subcomponents-div{
+    margin: 12% calc(var(--padding-container) - 34px);
+    background-color:var(--gray-2);
+    border-radius: 8px;
+    padding: 14px;
+}
+.components-list{
+  padding: var(--padding-container); /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  background-color: var(--gray-4); /* Cor cinza claro */
+}
+.footer{
+  margin:  12% calc(var(--padding-container) - 34px) calc(var(--padding-container) - 34px) calc(var(--padding-container) - 34px);
+  padding: calc(var(--padding-container) / 2);
+  border-radius: 8px; /* Bordas arredondadas */
+  
+}
+
+p{
+  line-height: 1.6;
+  font-size: 14px;
+  color: var(--gray-6);
+}
+
+
+h1{
+  font-size: 2.5em;
+  margin: 2% 0px;
+}
+
+h2{
+  margin: 15px 0px;
+  font-family: "Righteous", sans-serif;
+}
+/* display */
+.flex{
+    display: flex;
+}
+.flex-wrap{
+  flex-wrap: wrap;
+}
+.display-inline{
+  display: inline-flex; 
+}
+.align-center{
+  display: flex;
+  align-items: center;
+}
+.align-baseline{
+  display: flex;
+  align-items: baseline;
+}
+.justify-center{
+  justify-content: center;
+}
+.justify-around{
+    display: flex;
+    justify-content: space-around;
+}
+.justify-between{
+    display: flex;
+    justify-content: space-between;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.text-align-center{
+  text-align: center;
+}
+
+.background-purple-hover :hover{
+  background-color: var(--purple-3);
+  transition: background-color 0.5s ease;
+}
+
+.hover-gray:hover{
+  background-color: #555555;
+  transition: background-color 0.5s ease;
+}
+
+.hover-color-gradient:hover{
+  background: linear-gradient(to right,var(--purple-1),var(--purple-2));
+  transition: background-color 0.5s ease;
+}
+
+.hover-color-purple-2:hover{
+  color: var(--purple-3);
+  transition: color 0.5s ease;
+}
+
+.hover-bold:hover{
+  font-weight: bold;
+  transition: font-weight 0.5s ease;
+}
+
+/* shadow */
+.shadow{
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.171); /* Sombra do botão */
+}
+
+.shadow-lighter{
+  box-shadow: 1px 1px 10px rgba(104, 103, 103, 0.288); /* Sombra do botão */
+}
+/* icones */
+.circle{
+  width:  8px; /* Largura da esfera */
+  height: 8px; /* Altura da esfera */
+  border-radius: 50%; 
+  background: linear-gradient(to right,var(--purple-1),var(--purple-2));
+
+}
+/* Margens,paddings e espaços */
+.g-24{
+    gap: 24px;
+}
+.g-12{
+    gap: 12px;
+}
+.g-6{
+  gap: 6px;
+}
+.p-4-top{
+  padding-top : 4px
+}
+.p-4-bottom{
+  padding-bottom: 4px
+}
+
+.p-4-6{
+  padding: 4px 6px;
+}
+
+.p-6-10{
+  padding: 5px 9px;
+}
+
+.m-bottom-4{
+  margin-bottom: 4%;
+}
+.m-bottom-6{
+  margin-bottom: 6%;
+}
+
+.m-top-6{
+  margin-top: 6%;
+}
+
+.m-top-8{
+  margin-top: 8%;
+}
+
+.m-top-4{
+  margin-top: 4%;
+}
+
+.m-top-12{
+  margin-top: 16%;
+}
+
+button{
+  background-color: #414040;
+  color: white;
+  padding: 10px;
+}
+
+
+/* Fundo opaco */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contêiner do modal */
+.modal-container {
+  background-color: #ca181896;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  padding: 20px;
+  position: relative;
+}
+
+/* Botão de fechar */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Título do modal */
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
