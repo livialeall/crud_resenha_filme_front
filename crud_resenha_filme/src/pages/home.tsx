@@ -13,24 +13,22 @@ const Home = () => {
   };
 
   return (
-    <div className="main-div shadow rounded-10">
-      <div className="flex g-24">
-        <h1>Resenha de Filmes</h1>
-        <button onClick={openModal}>ADICIONAR RESENHA</button>
+      <div className="g-24 component-div">
+        <div className="g-24 align-center">
+            <h1>Resenha de Filmes</h1>
+            <button onClick={openModal}>ADICIONAR RESENHA</button>
+        </div>
+        <Grid></Grid>
         {isOpen && (
-          <div>
-            <div className="modal-overlay" onClick={closeModal}>
-              <div className="modal-container">
-                Grid do Modal
-                <button onClick={closeModal}>Fecha</button>
-                <button onClick={closeModal}>Confirma</button>
-              </div>
+          <div className="modal-overlay" onClick={closeModal}>
+            <div className="modal-container">
+              Grid do Modal
+              <button onClick={closeModal}>Fecha</button>
+              <button onClick={closeModal}>Confirma</button>
             </div>
           </div>
         )}
       </div>
-      <Grid></Grid>
-    </div>
   );
 };
 

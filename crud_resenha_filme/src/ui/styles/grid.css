@@ -1,0 +1,33 @@
+.grid-review{
+    display: grid;
+    background-color: aliceblue;
+    padding: 12px 16px;
+    grid-template-columns: 10px 1fr 1fr 0.5fr 0.5fr;
+    text-align: center;
+    border-radius: 6px;
+    height: 425px;
+    max-height: 70%;
+    scrollbar-color: #888888c0 #f1f1f100;
+    overflow: hidden;
+}
+.grid-header{
+    display: grid;
+    background-color: aliceblue;
+    padding: 12px 16px;
+    grid-template-columns: 10px 1fr 1fr 0.5fr 0.5fr;
+    margin-bottom: 8px;
+    text-align: center;
+    border-radius: 6px;
+    scrollbar-color: #888888c0 #f1f1f100; 
+}
+
+.grid-header div{
+    border-right: 1px solid rgba(77, 77, 77, 0.205);
+}
+
+.grid-review div{
+    border-right: 1px solid  rgba(77, 77, 77, 0.205);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
