@@ -14,13 +14,14 @@
 }
 
 .modal-container {
-    background-color: #ca1818;
+    background-color: #1f1e1e;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 500px;
     padding: 20px;
     position: relative;
+    color: aliceblue;
   }
   
   /* Botão de fechar */

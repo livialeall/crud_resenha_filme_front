@@ -146,7 +146,7 @@ button,
 input,
 textarea {
   border: none;
-  background: none;
+  background: white;
   font-family: inherit;
   color: var(--gray-1);
 }
@@ -155,7 +155,6 @@ body {
   background: var(--gray-2);
   color: var(--gray-0);
   width: 100vw;
-  height: 100vh;
   font-family: "Roboto", system-ui;
   font-weight: 400;
   font-style: normal;
@@ -207,10 +206,8 @@ body {
   background-color: var(--gray-7);
   box-shadow: 1px 1px 10px rgba(17, 17, 17, 0.285);
   width: 1200px;
-  height: 100vh;
   max-width: 90vw;
-  max-height: 600px;
-  margin: 0 auto;
+  margin: 25px auto;
 }
 
 .subcomponents-div{
@@ -319,7 +316,7 @@ h2{
 }
 
 .shadow-lighter{
-  box-shadow: 1px 1px 10px rgba(104, 103, 103, 0.288); /* Sombra do botão */
+  box-shadow: 1px 1px 5px rgba(94, 94, 94, 0.089); /* Sombra do botão */
 }
 /* icones */
 .circle{
