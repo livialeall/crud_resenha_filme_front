@@ -348,7 +348,15 @@ h2{
 }
 
 .p-6-10{
-  padding: 5px 9px;
+  padding: 6px 10px;
+}
+
+.p-8-12{
+  padding: 8px 12px;
+}
+
+.p-10{
+  padding: 10px;
 }
 
 .m-bottom-4{

@@ -3,6 +3,7 @@ import Grid from "../ui/components/grid";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchItem, setSearchItem] = useState("");
 
   const openModal = () => {
     setIsOpen(true);
@@ -19,8 +20,17 @@ const Home = () => {
         <button onClick={openModal} className="rounded-3 shadow-lighter">
           Adicionar resenha
         </button>
+        <input
+          type="search"
+          name=""
+          id=""
+          placeholder="Procure um filme"
+          className="p-10 rounded-3 shadow-lighter"
+          value={searchItem}
+          onChange={(e)=> setSearchItem(e.target.value)}
+        />
       </div>
-      <Grid></Grid>
+      <Grid search={searchItem}></Grid>
       {isOpen && (
         <div className="modal-overlay">
           <div className="modal-container">

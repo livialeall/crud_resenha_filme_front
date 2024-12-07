@@ -1,6 +1,6 @@
 import useGetReviews from "../../data/reviews.tsx";
 
-const Grid = () => {
+const Grid = ({search} : {search:string}) => {
   const { data, error, loading } = useGetReviews();
   
 
@@ -18,7 +18,9 @@ const Grid = () => {
         {loading && <div className="justify-center align-center font-size-18">Carregando...</div>}
         {error && <div className="justify-center align-center font-size-18">Poxa, tivemos um erro para buscar as resenhas.</div>}
         {data &&
-          data.map((item, index) => (
+          data
+          .filter((item)=> item.nome.toLowerCase().includes(search))
+          .map((item, index) => (
             <div className="grid">
               <div>{index + 1}</div>
               <div>{item.nome}</div>
