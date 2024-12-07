@@ -207,7 +207,7 @@ body {
   box-shadow: 1px 1px 10px rgba(17, 17, 17, 0.285);
   width: 1200px;
   max-width: 90vw;
-  margin: 25px auto;
+  margin: 75px auto;
 }
 
 .subcomponents-div{
@@ -386,4 +386,6 @@ button{
   background-color: #414040;
   color: white;
   padding: 10px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px rgba(94, 94, 94, 0.089);
 }
