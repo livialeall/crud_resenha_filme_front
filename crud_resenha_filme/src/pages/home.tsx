@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Grid from "../ui/components/grid";
-import Footer from "../ui/components/pagination";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +17,7 @@ const Home = () => {
       <div className="g-24 component-div">
         <div className="g-24 align-center">
           <h1>Resenha de Filmes</h1>
-          <button onClick={openModal} className="rounded-3 shadow-lighter">
+          <button onClick={openModal} className="rounded-3 shadow-lighter active">
             Adicionar resenha
           </button>
           <input
