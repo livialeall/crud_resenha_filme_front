@@ -1,11 +1,12 @@
-import { useState } from "react";
-import useGetReviews from "../../data/reviews.tsx";
+import { useCallback, useMemo, useState } from "react";
+import useGetReviews, { Review } from "../../data/reviews.tsx";
+import Pagination from "./pagination.tsx";
 
 const Grid = ({ search }: { search: string }) => {
-  const { data, error, loading } = useGetReviews();
   const [pageNumber, setPageNumber] = useState(1);
   const headers = ["#", "Nome do Filme", "Resenha", "Nota", "Ações"];
   const limit = 5;
+  const {data,error,loading} = useGetReviews();
   const shownLength = Math.ceil(data?.length / limit);
 
   const pagesList = [];
@@ -13,9 +14,8 @@ const Grid = ({ search }: { search: string }) => {
     pagesList.push(index);
   }
 
-  const filteredData = data.filter((item) =>
-    item.nome.toLowerCase().includes(search.trim())
-  );
+  const searchedData = data.filter((item) => item.nome.toLowerCase().includes(search.trim()))
+  console.log(data);
 
   return (
     <>
@@ -36,12 +36,8 @@ const Grid = ({ search }: { search: string }) => {
           </div>
         )}
         {data &&
-          filteredData
-            .filter(
-              (item, index) =>
-                index + 1 <= pageNumber * limit &&
-                index + 1 >= pageNumber * limit - limit
-            )
+          searchedData
+          .slice((pageNumber - 1) * limit, pageNumber * limit)
             .map((item, index) => (
               <div className="grid">
                 <div>{item.id} </div>
@@ -55,23 +51,12 @@ const Grid = ({ search }: { search: string }) => {
               </div>
             ))}
         {data ? (
-                <div className="flex justify-between align-center">
-                  <div>
-                    Mostrando {limit} de {data.length} avaliações
-                  </div>
-                  <div className="justify-around g-6">
-                    {pagesList.map((item) => (
-                      <button
-                        onClick={(e) =>
-                          setPageNumber(Number.parseInt(e.currentTarget.value))
-                        }
-                        value={item}
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+          <div className="flex justify-between align-center">
+            <div>
+              Mostrando {limit} de {data.length} avaliações
+            </div>
+            <Pagination pagesList={pagesList} selectedPageNumber={pageNumber} onPageChange= {setPageNumber}></Pagination>
+          </div>
         ) : null}
       </div>
     </>
