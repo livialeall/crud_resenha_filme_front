@@ -4,6 +4,8 @@ import Pagination from "./pagination.tsx";
 
 const Grid = ({ search }: { search: string }) => {
   const [pageNumber, setPageNumber] = useState(1);
+  const [desactivated,setDeactivated] = useState(false)
+  const listDesactivated = []
   const headers = ["Nome do Filme", "Resenha", "Nota", "Ações"];
   const limit = 5;
   const { data, error, loading } = useGetReviews();
@@ -27,6 +29,10 @@ const Grid = ({ search }: { search: string }) => {
     pagesList.push(index);
   }
 
+  const handleDeleteButton = () => {
+    setDeactivated(!desactivated)
+  }
+
   return (
     <>
       <div className="grid-header">
@@ -47,13 +53,13 @@ const Grid = ({ search }: { search: string }) => {
         )}
         {paginatedData &&
           paginatedData.map((item, index) => (
-            <div className="grid">
+            <div className={`grid ${desactivated && "deactivated"}`} key={item.id}>
               <div>{item.nome}</div>
               <div>{item.resenha}</div>
               <div>{item.nota}</div>
               <div className="flex justify-center g-12 ">
                 <button>Editar</button>
-                <button>Deletar</button>
+                <button onClick={handleDeleteButton}>Deletar</button>
               </div>
             </div>
           ))}

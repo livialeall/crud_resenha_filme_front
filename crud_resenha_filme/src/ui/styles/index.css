@@ -194,6 +194,12 @@ body {
 .active {
   background: linear-gradient(to right,var(--purple-1),var(--purple-2));
 }
+
+.deactivated{
+  color: red;
+  text-decoration: line-through;
+
+}
 .max-width{
   max-width: 100%;
 }
