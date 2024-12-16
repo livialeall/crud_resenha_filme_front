@@ -196,7 +196,7 @@ body {
 }
 
 .deactivated{
-  color: red;
+  color: rgba(128, 128, 128, 0.505);
   text-decoration: line-through;
 
 }

@@ -1,16 +1,17 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import useGetReviews, { Review } from "../../data/reviews.tsx";
 import Pagination from "./pagination.tsx";
 
 const Grid = ({ search }: { search: string }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const [desactivated,setDeactivated] = useState(false)
-  const listDesactivated = []
+  const [deletedItems,setDeletedItems] = useState([])
   const headers = ["Nome do Filme", "Resenha", "Nota", "Ações"];
   const limit = 5;
   const { data, error, loading } = useGetReviews();
 
-  const searchedData = data.filter((item) =>
+  const cleanedData = data.filter((item)=> !deletedItems.includes(item.id.toString()))
+  console.log(cleanedData);
+  const searchedData = cleanedData.filter((item) =>
     item.nome.toLowerCase().includes(search.toLowerCase().trim())
   );
 
@@ -29,8 +30,9 @@ const Grid = ({ search }: { search: string }) => {
     pagesList.push(index);
   }
 
-  const handleDeleteButton = () => {
-    setDeactivated(!desactivated)
+  const handleDeleteButton = (id : number) => {
+    console.log(id)
+    setDeletedItems((prev) => [...prev,id])
   }
 
   return (
@@ -53,13 +55,15 @@ const Grid = ({ search }: { search: string }) => {
         )}
         {paginatedData &&
           paginatedData.map((item, index) => (
-            <div className={`grid ${desactivated && "deactivated"}`} key={item.id}>
-              <div>{item.nome}</div>
-              <div>{item.resenha}</div>
-              <div>{item.nota}</div>
+            <div className="grid">
+              <div className="grid-item" key={item.id}>
+                <div>{item.nome}</div>
+                <div>{item.resenha}</div>
+                <div>{item.nota}</div>
+              </div>
               <div className="flex justify-center g-12 ">
                 <button>Editar</button>
-                <button onClick={handleDeleteButton}>Deletar</button>
+                <button onClick={(e) => handleDeleteButton(e.currentTarget.value)} value={item.id}>Deletar</button>
               </div>
             </div>
           ))}
