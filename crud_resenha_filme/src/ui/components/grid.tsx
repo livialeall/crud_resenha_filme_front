@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import useGetReviews, { Review } from "../../data/reviews.tsx";
 import Pagination from "./pagination.tsx";
+import Notification from "./notification.tsx";
 
 const Grid = ({ search }: { search: string }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [deletedItems, setDeletedItems] = useState<string[]>([]);
   const [itemToBeDeleted, setItemToBeDeleted] = useState<Review>();
   const headers = ["Nome do Filme", "Resenha", "Nota", "Ações"];
+  const [notificationOpen,setNotificationOpen] = useState(false)
   const limit = 5;
   const { data, error, loading } = useGetReviews();
   const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
@@ -46,6 +48,14 @@ const Grid = ({ search }: { search: string }) => {
   const handleDeleteButton = (id: string) => {
     setDeletedItems((prev) => [...prev, id]);
     setModalConfirmDelete(false)
+
+    const handleNotification = () => {
+      setNotificationOpen(true)
+      setTimeout(() => {
+        setNotificationOpen(false);
+      }, 1500000);
+    }
+    handleNotification()
   };
 
   return (
@@ -117,6 +127,9 @@ const Grid = ({ search }: { search: string }) => {
             Não foram encontradas resenhas
           </div>
         )}
+        {notificationOpen &&
+          <Notification message={"Resenha deletada com sucesso!"} ></Notification>
+        }
       </div>
     </>
   );

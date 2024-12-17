@@ -395,3 +395,14 @@ button{
   border-radius: 3px;
   box-shadow: 1px 1px 5px rgba(94, 94, 94, 0.089);
 }
+
+.notification-information {
+  background-color: #2B2B2B;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 40%;
+  height: 35px;
+}
