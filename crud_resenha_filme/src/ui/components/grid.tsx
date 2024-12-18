@@ -53,7 +53,7 @@ const Grid = ({ search }: { search: string }) => {
       setNotificationOpen(true)
       setTimeout(() => {
         setNotificationOpen(false);
-      }, 1500000);
+      }, 3000);
     }
     handleNotification()
   };
