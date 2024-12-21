@@ -11,13 +11,13 @@ const useGetReviews = () => {
   const [data, setData] = useState<Review[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
-  const usingMock = true;
+  const usingMock = false;
   useEffect(() => {
       const fetchData = async () => {
         try {
           let response;
           if (!usingMock) {
-            response = await fetch("");
+            response = await fetch("http://127.0.0.1:8000/read_review/");
           } else { 
             response = await fetch('src/mocks/resenhas.json');
           }
@@ -42,4 +42,22 @@ const useGetReviews = () => {
   return { data, error, loading };
 };
 
+const deleteReviews = ({id}) => {
+  const [status,setStatus] = useState("")
+  useEffect(()=> {
+    const deleteData = async () =>{
+      try{
+        const message = await fetch("http://127.0.0.1:8000/delete_review/{id}")
+        setStatus("Sucesso")
+      }
+      catch(error){
+        setStatus("Erro")
+        console.log(error)
+      }
+    } 
+    deleteData()
+  },[])
+  return status
+}
+    
 export default useGetReviews;
