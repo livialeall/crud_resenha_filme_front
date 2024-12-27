@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext,createContext } from "react";
+import { useState, useEffect} from "react";
 
 export interface Review {
   id: number;
@@ -7,7 +7,7 @@ export interface Review {
   nota: number;
 }
 
-const useGetReviews = () => {
+export const useGetReviews = () => {
   const [data, setData] = useState<Review[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
@@ -42,22 +42,36 @@ const useGetReviews = () => {
   return { data, error, loading };
 };
 
-const deleteReviews = ({id}) => {
-  const [status,setStatus] = useState("")
-  useEffect(()=> {
-    const deleteData = async () =>{
+export const deleteReviews = async (id: string) => {
       try{
-        const message = await fetch("http://127.0.0.1:8000/delete_review/{id}")
-        setStatus("Sucesso")
+        const response = await fetch(`http://127.0.0.1:8000/delete_review/${id}`,
+          {method: "DELETE"}
+        )
+        if(!response.ok){
+          throw new Error()
+        }
+        return response.status
       }
       catch(error){
-        setStatus("Erro")
         console.log(error)
+        return error
       }
-    } 
-    deleteData()
-  },[])
-  return status
 }
     
-export default useGetReviews;
+export const createReviews = async (review: { nome: FormDataEntryValue | null; resenha: FormDataEntryValue | null; nota: FormDataEntryValue | null; }) => {
+  try{
+    const response = await fetch(`http://127.0.0.1:8000/create_review`,
+      {method: "POST",
+      body: JSON.stringify(review),
+      }
+    )
+    if(!response.ok){
+      throw new Error()
+    }
+    return response.status
+  }
+  catch(error){
+    console.log(error)
+    return error
+  }
+}

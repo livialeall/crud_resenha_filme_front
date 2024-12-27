@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Grid from "../ui/components/grid";
+import { createReviews, Review, useGetReviews } from "../data/reviews";
+import handleNotification from "../data/notification";
+import Notification from "../ui/components/notification.tsx";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchItem, setSearchItem] = useState("");
-
+  const [messageNotification,setNotificationMessage] = useState("");
+  const [notificationOpen,setNotificationOpen] = useState(false);
+  
   const openModal = () => {
     setIsOpen(true);
   };
@@ -12,6 +17,30 @@ const Home = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const data= {
+      nome: formData.get("nome"),
+      resenha: formData.get("resenha"),
+      nota: formData.get("nota"),
+    };
+    console.log(name)
+
+    const response = await createReviews(data);
+    if(response == 200){
+      setNotificationMessage("Resenhac criada com sucesso!")
+      useGetReviews();
+    }else{
+      console.log(response)
+      setNotificationMessage("Ocorreu um erro ao inserir sua resenha.")
+    }
+    closeModal()
+    setNotificationOpen(handleNotification())
+  }
 
   return (
       <div className="g-24 component-div">
@@ -50,21 +79,26 @@ const Home = () => {
                 </label>
                 <div className="flex g-12">
                   <button
-                    onClick={closeModal}
+                    onSubmit={(e) => handleSubmit(e)}
                     className="rounded-3 shadow-lighter"
                   >
-                    Fecha
+                    Confirma
                   </button>
                   <button
                     onClick={closeModal}
                     className="rounded-3 shadow-lighter"
                   >
-                    Confirma
+                    Fechar
                   </button>
                 </div>
               </form>
             </div>
           </div>
+        )}
+        {notificationOpen && (
+          <Notification
+            message={messageNotification}
+          ></Notification>
         )}
       </div>
   );
