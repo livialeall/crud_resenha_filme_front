@@ -18,28 +18,20 @@ const Home = () => {
     setIsOpen(false);
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
 
     const data= {
-      nome: formData.get("nome"),
-      resenha: formData.get("resenha"),
-      nota: formData.get("nota"),
+        id:0,
+        nome: formData.get("nome"),
+        resenha: formData.get("resenha"),
+        nota: formData.get("nota"),
     };
-    console.log(name)
 
     const response = await createReviews(data);
-    if(response == 200){
-      setNotificationMessage("Resenhac criada com sucesso!")
-      useGetReviews();
-    }else{
-      console.log(response)
-      setNotificationMessage("Ocorreu um erro ao inserir sua resenha.")
-    }
     closeModal()
-    setNotificationOpen(handleNotification())
+    
   }
 
   return (
@@ -62,24 +54,24 @@ const Home = () => {
         <Grid search={searchItem}></Grid>
         {isOpen && (
           <div className="modal-overlay">
-            <div className="modal-container">
-              Adicione sua resenha
-              <form action="POST" className="flex-column ">
+            <div className="modal-container form">
+              <h2>Adicione sua resenha</h2>
+              <form action="POST" className="flex-column" onSubmit={handleSubmit}>
                 <label>
                   Filme:
-                  <input type="text" />
+                  <input type="text" name="nome"/>
                 </label>
                 <label>
                   Sua Resenha:
-                  <input type="text" />
+                  <input type="text" name="resenha" />
                 </label>
                 <label>
                   Sua nota:
-                  <input type="text" />
+                  <input type="text" name="nota" />
                 </label>
                 <div className="flex g-12">
                   <button
-                    onSubmit={(e) => handleSubmit(e)}
+                    type="submit"
                     className="rounded-3 shadow-lighter"
                   >
                     Confirma

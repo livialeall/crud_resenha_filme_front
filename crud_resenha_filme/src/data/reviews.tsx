@@ -42,7 +42,7 @@ export const useGetReviews = () => {
   return { data, error, loading };
 };
 
-export const deleteReviews = async (id: string) => {
+export const deleteReviews = async (id: number) => {
       try{
         const response = await fetch(`http://127.0.0.1:8000/delete_review/${id}`,
           {method: "DELETE"}
@@ -58,11 +58,14 @@ export const deleteReviews = async (id: string) => {
       }
 }
     
-export const createReviews = async (review: { nome: FormDataEntryValue | null; resenha: FormDataEntryValue | null; nota: FormDataEntryValue | null; }) => {
+export const createReviews = async (review: { id: number ;nome: FormDataEntryValue | null; resenha: FormDataEntryValue | null; nota: FormDataEntryValue | null;}) => {
   try{
     const response = await fetch(`http://127.0.0.1:8000/create_review`,
       {method: "POST",
-      body: JSON.stringify(review),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(review),
       }
     )
     if(!response.ok){

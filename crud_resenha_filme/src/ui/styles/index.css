@@ -247,8 +247,7 @@ h1{
 }
 
 h2{
-  margin: 15px 0px;
-  font-family: "Righteous", sans-serif;
+  margin-bottom:6px;
 }
 /* display */
 .flex{
@@ -405,4 +404,14 @@ button{
   border-radius: 5px;
   width: 40%;
   height: 35px;
+}
+
+.form input{
+  margin: 8px 6px;
+  border-radius: 2px;
+  padding: 2.5px;
+}
+
+.form button{
+  margin-top: 10px;
 }

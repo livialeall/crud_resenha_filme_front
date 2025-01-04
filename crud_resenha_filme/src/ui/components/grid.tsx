@@ -41,10 +41,12 @@ const Grid = ({ search }: { search: string }) => {
     setModalConfirmDelete(true);
   };
 
-  const handleDeleteButton = async (id: string) => {
+  const handleDeleteButton = async (id: number) => {
     console.log(id);
     const response = await deleteReviews(id);
-    if (response == 200) {
+    console.log(response)
+    useGetReviews();
+    /* if (response == 200) {
       setNotificationMessage("Mensagem deletada com sucesso!")
       useGetReviews();
     } 
@@ -52,15 +54,15 @@ const Grid = ({ search }: { search: string }) => {
       console.log(response)
       setNotificationMessage("Ocorreu um erro ao deletar sua mensagem.")
     }
-    setNotificationOpen(handleNotification());
-    setModalConfirmDelete(false);
+    handleNotification();
+    setModalConfirmDelete(false); */
   };
 
   return (
     <>
       <div className="grid-header">
         {headers.map((item) => (
-          <div className="justify-center flex g-4">{item}</div>
+          <div className="justify-center flex g-4" key={item}>{item}</div>
         ))}
       </div>
       <div>
