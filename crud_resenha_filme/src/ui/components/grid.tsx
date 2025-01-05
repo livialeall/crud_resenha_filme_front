@@ -16,6 +16,7 @@ const Grid = ({ search }: { search: string }) => {
   const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [valueEditing,setValueEditing] = useState("")
+  const [nameEditing,setNameEditing] = useState("")
 
   const searchedData = data.filter((item) =>
     item.nome.toLowerCase().includes(search.toLowerCase().trim())
@@ -62,13 +63,15 @@ const Grid = ({ search }: { search: string }) => {
     setModalConfirmDelete(false);
   };
 
-  const handleEditButton = (id:string) => {
+  const handleEditButton = (id:string,nome:string) => {
     setValueEditing(id)
+    setNameEditing(nome)
     setIsOpen(true)
   };
 
   const closeModal = () => {
     setIsOpen(false);
+    setNameEditing("")
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -83,6 +86,7 @@ const Grid = ({ search }: { search: string }) => {
       };
   
       const response = await updateReviews(data);
+      setNameEditing("")
   }
   
   return (
@@ -114,7 +118,7 @@ const Grid = ({ search }: { search: string }) => {
                 <div>{item.nota}</div>
               </div>
               <div className="flex justify-center g-12 ">
-                <button value={item.id} onClick={(e) => handleEditButton(e.currentTarget.value)}>
+                <button value={item.id} onClick={(e) => handleEditButton(e.currentTarget.value,item.nome)}>
                   Editar
                 </button>
                 <button
@@ -128,7 +132,7 @@ const Grid = ({ search }: { search: string }) => {
               </div>
             </div>
           ))}
-        {isOpen && <Form onClose={closeModal} onSubmit={handleSubmit}></Form>}
+        {isOpen && <Form onClose={closeModal} onSubmit={handleSubmit} initialValue={nameEditing}></Form>}
         {modalConfirmDelete && (
           <div className="modal-overlay">
             <div className="modal-container">

@@ -53,7 +53,7 @@ const Home = () => {
         </div>
         <Grid search={searchItem}></Grid>
         {isOpen && (
-          <Form onClose={closeModal} onSubmit={handleSubmit}></Form>
+          <Form onClose={closeModal} onSubmit={handleSubmit} initialValue={""}></Form>
         )}
         {notificationOpen && (
           <Notification
