@@ -194,6 +194,12 @@ body {
 .active {
   background: linear-gradient(to right,var(--purple-1),var(--purple-2));
 }
+
+.deactivated{
+  color: rgba(128, 128, 128, 0.505);
+  text-decoration: line-through;
+
+}
 .max-width{
   max-width: 100%;
 }
@@ -241,8 +247,7 @@ h1{
 }
 
 h2{
-  margin: 15px 0px;
-  font-family: "Righteous", sans-serif;
+  margin-bottom:6px;
 }
 /* display */
 .flex{
@@ -388,4 +393,25 @@ button{
   padding: 10px;
   border-radius: 3px;
   box-shadow: 1px 1px 5px rgba(94, 94, 94, 0.089);
+}
+
+.notification-information {
+  background-color: #2B2B2B;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 40%;
+  height: 35px;
+}
+
+.form input{
+  margin: 8px 6px;
+  border-radius: 2px;
+  padding: 2.5px;
+}
+
+.form button{
+  margin-top: 10px;
 }
