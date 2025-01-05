@@ -3,6 +3,7 @@ import Grid from "../ui/components/grid";
 import { createReviews, Review, useGetReviews } from "../data/reviews";
 import handleNotification from "../data/notification";
 import Notification from "../ui/components/notification.tsx";
+import Form from "../ui/components/form.tsx";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +31,8 @@ const Home = () => {
     };
 
     const response = await createReviews(data);
-    closeModal()
-    
   }
+
 
   return (
       <div className="g-24 component-div">
@@ -53,39 +53,7 @@ const Home = () => {
         </div>
         <Grid search={searchItem}></Grid>
         {isOpen && (
-          <div className="modal-overlay">
-            <div className="modal-container form">
-              <h2>Adicione sua resenha</h2>
-              <form action="POST" className="flex-column" onSubmit={handleSubmit}>
-                <label>
-                  Filme:
-                  <input type="text" name="nome"/>
-                </label>
-                <label>
-                  Sua Resenha:
-                  <input type="text" name="resenha" />
-                </label>
-                <label>
-                  Sua nota:
-                  <input type="text" name="nota" />
-                </label>
-                <div className="flex g-12">
-                  <button
-                    type="submit"
-                    className="rounded-3 shadow-lighter"
-                  >
-                    Confirma
-                  </button>
-                  <button
-                    onClick={closeModal}
-                    className="rounded-3 shadow-lighter"
-                  >
-                    Fechar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+          <Form onClose={closeModal} onSubmit={handleSubmit}></Form>
         )}
         {notificationOpen && (
           <Notification

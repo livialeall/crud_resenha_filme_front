@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Pagination from "./pagination.tsx";
 import Notification from "./notification.tsx";
-import { useGetReviews, Review, deleteReviews } from "../../data/reviews.tsx";
+import { useGetReviews, Review, deleteReviews, updateReviews } from "../../data/reviews.tsx";
 import handleNotification from "../../data/notification.tsx";
+import Form from "./form.tsx";
 
 const Grid = ({ search }: { search: string }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const [notificationOpen,setNotificationOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
   const [itemToBeDeleted, setItemToBeDeleted] = useState<Review>();
   const headers = ["Nome do Filme", "Resenha", "Nota", "Ações"];
   const limit = 5;
   const { data, error, loading } = useGetReviews();
-  const [messageNotification,setNotificationMessage] = useState("");
+  const [messageNotification, setNotificationMessage] = useState("");
   const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [valueEditing,setValueEditing] = useState("")
 
   const searchedData = data.filter((item) =>
     item.nome.toLowerCase().includes(search.toLowerCase().trim())
@@ -36,7 +39,7 @@ const Grid = ({ search }: { search: string }) => {
   }
 
   const handleConfirmDeleteButton = (id: string) => {
-    console.log(id)
+    console.log(id);
     const teste = data.filter((item) => item.id.toString() == id);
     setItemToBeDeleted(teste[0]);
     setModalConfirmDelete(true);
@@ -45,27 +48,50 @@ const Grid = ({ search }: { search: string }) => {
   const handleDeleteButton = async (id: string) => {
     console.log(id);
     const response = await deleteReviews(Number(id));
-    console.log(response)
-    setModalConfirmDelete(false)
+    console.log(response);
+    setModalConfirmDelete(false);
     useGetReviews();
     if (response == 200) {
-      setNotificationMessage("Mensagem deletada com sucesso!")
+      setNotificationMessage("Mensagem deletada com sucesso!");
       useGetReviews();
-    } 
-    else {
-      console.log(response)
-      setNotificationMessage("Ocorreu um erro ao deletar sua mensagem.")
+    } else {
+      console.log(response);
+      setNotificationMessage("Ocorreu um erro ao deletar sua mensagem.");
     }
     handleNotification();
     setModalConfirmDelete(false);
-
   };
 
+  const handleEditButton = (id:string) => {
+    setValueEditing(id)
+    setIsOpen(true)
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+  
+      const data= {
+          id:Number(valueEditing),
+          nome: formData.get("nome"),
+          resenha: formData.get("resenha"),
+          nota: formData.get("nota"),
+      };
+  
+      const response = await updateReviews(data);
+  }
+  
   return (
     <>
       <div className="grid-header">
         {headers.map((item) => (
-          <div className="justify-center flex g-4" key={item}>{item}</div>
+          <div className="justify-center flex g-4" key={item}>
+            {item}
+          </div>
         ))}
       </div>
       <div>
@@ -88,7 +114,9 @@ const Grid = ({ search }: { search: string }) => {
                 <div>{item.nota}</div>
               </div>
               <div className="flex justify-center g-12 ">
-                <button>Editar</button>
+                <button value={item.id} onClick={(e) => handleEditButton(e.currentTarget.value)}>
+                  Editar
+                </button>
                 <button
                   value={item.id}
                   onClick={(e) =>
@@ -100,6 +128,7 @@ const Grid = ({ search }: { search: string }) => {
               </div>
             </div>
           ))}
+        {isOpen && <Form onClose={closeModal} onSubmit={handleSubmit}></Form>}
         {modalConfirmDelete && (
           <div className="modal-overlay">
             <div className="modal-container">
@@ -139,9 +168,7 @@ const Grid = ({ search }: { search: string }) => {
           </div>
         )}
         {notificationOpen && (
-          <Notification
-            message={messageNotification}
-          ></Notification>
+          <Notification message={messageNotification}></Notification>
         )}
       </div>
     </>
