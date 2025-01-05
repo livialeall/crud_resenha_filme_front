@@ -36,17 +36,19 @@ const Grid = ({ search }: { search: string }) => {
   }
 
   const handleConfirmDeleteButton = (id: string) => {
+    console.log(id)
     const teste = data.filter((item) => item.id.toString() == id);
     setItemToBeDeleted(teste[0]);
     setModalConfirmDelete(true);
   };
 
-  const handleDeleteButton = async (id: number) => {
+  const handleDeleteButton = async (id: string) => {
     console.log(id);
-    const response = await deleteReviews(id);
+    const response = await deleteReviews(Number(id));
     console.log(response)
+    setModalConfirmDelete(false)
     useGetReviews();
-    /* if (response == 200) {
+    if (response == 200) {
       setNotificationMessage("Mensagem deletada com sucesso!")
       useGetReviews();
     } 
@@ -55,7 +57,8 @@ const Grid = ({ search }: { search: string }) => {
       setNotificationMessage("Ocorreu um erro ao deletar sua mensagem.")
     }
     handleNotification();
-    setModalConfirmDelete(false); */
+    setModalConfirmDelete(false);
+
   };
 
   return (
@@ -101,7 +104,7 @@ const Grid = ({ search }: { search: string }) => {
           <div className="modal-overlay">
             <div className="modal-container">
               <span>
-                Tem certeza que quer deletar a resenha do filme:{" "}
+                Tem certeza que quer deletar a resenha do filme:
                 {itemToBeDeleted?.nome}
               </span>
               <div className="flex justify-center g-12 m-top-4">
