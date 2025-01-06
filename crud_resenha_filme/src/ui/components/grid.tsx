@@ -1,13 +1,18 @@
 import { FormEvent, useEffect, useState } from "react";
 import Pagination from "./pagination.tsx";
 import Notification from "./notification.tsx";
-import { useGetReviews, Review, deleteReviews, updateReviews } from "../../data/reviews.tsx";
-import handleNotification from "../../data/notification.tsx";
+import {
+  useGetReviews,
+  Review,
+  deleteReviews,
+  updateReviews,
+} from "../../data/reviews.tsx";
 import Form from "./form.tsx";
 
 const Grid = ({ search }: { search: string }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const [typeNotification, setNotificationType] = useState("");
   const [itemToBeDeleted, setItemToBeDeleted] = useState<Review>();
   const headers = ["Nome do Filme", "Resenha", "Nota", "Ações"];
   const limit = 5;
@@ -15,8 +20,8 @@ const Grid = ({ search }: { search: string }) => {
   const [messageNotification, setNotificationMessage] = useState("");
   const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [valueEditing,setValueEditing] = useState("")
-  const [nameEditing,setNameEditing] = useState("")
+  const [valueEditing, setValueEditing] = useState("");
+  const [nameEditing, setNameEditing] = useState("");
 
   const searchedData = data.filter((item) =>
     item.nome.toLowerCase().includes(search.toLowerCase().trim())
@@ -29,6 +34,14 @@ const Grid = ({ search }: { search: string }) => {
   useEffect(() => {
     setPageNumber(1);
   }, [search]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNotificationOpen(false); // Altera o estado para esconder o componente
+    }, 4000); // 10 segundos em milissegundos (10000ms)
+
+    return () => clearTimeout(timer);
+  }, [notificationOpen]);
 
   const startIndex = (pageNumber - 1) * limit;
   const endIndex = startIndex + limit;
@@ -47,51 +60,57 @@ const Grid = ({ search }: { search: string }) => {
   };
 
   const handleDeleteButton = async (id: string) => {
-    console.log(id);
     const response = await deleteReviews(Number(id));
-    console.log(response);
+    setNotificationOpen(true);
+    console.log("Abriu a notificação")
     setModalConfirmDelete(false);
-    useGetReviews();
+    closeModal();
     if (response == 200) {
-      setNotificationMessage("Mensagem deletada com sucesso!");
-      useGetReviews();
+      setNotificationMessage("Resenha deletada com sucesso!");
     } else {
-      console.log(response);
-      setNotificationMessage("Ocorreu um erro ao deletar sua mensagem.");
+      setNotificationMessage("Ocorreu um erro ao deletar sua resenha.");
     }
-    handleNotification();
-    setModalConfirmDelete(false);
   };
 
-  const handleEditButton = (id:string,nome:string) => {
-    setValueEditing(id)
-    setNameEditing(nome)
-    setIsOpen(true)
+  /* Esse é para abrir o modal de edição */
+  const handleEditButton = (id: string, nome: string) => {
+    setValueEditing(id);
+    setNameEditing(nome);
+    setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
-    setNameEditing("")
+    setNameEditing("");
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
-  
-      const data= {
-          id:Number(valueEditing),
-          nome: formData.get("nome"),
-          resenha: formData.get("resenha"),
-          nota: formData.get("nota"),
-      };
-  
-      const response = await updateReviews(data);
-      setNameEditing("")
-  }
-  
+  const handleSubmitEdit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const data = {
+      id: Number(valueEditing),
+      nome: formData.get("nome"),
+      resenha: formData.get("resenha"),
+      nota: formData.get("nota"),
+    };
+
+    const response = await updateReviews(data);
+    closeModal();
+    console.log("Abriu a notificação")
+    setNotificationOpen(true);
+    if (response == 200) {
+      setNotificationType("sucess");
+      setNotificationMessage("Sua resenha foi editada com sucesso");
+    } else {
+      setNotificationType("error");
+      setNotificationMessage("Houve um problema para editar sua resenha");
+    }
+  };
+
   return (
     <>
-      <div className="grid-header">
+      <div className="grid header">
         {headers.map((item) => (
           <div className="justify-center flex g-4" key={item}>
             {item}
@@ -111,28 +130,39 @@ const Grid = ({ search }: { search: string }) => {
         )}
         {paginatedData &&
           paginatedData.map((item) => (
-            <div className="grid">
-              <div className="grid-item" key={item.id}>
+            <>
+              <div className="grid" key={item.id}>
                 <div>{item.nome}</div>
                 <div>{item.resenha}</div>
                 <div>{item.nota}</div>
+                <div className="flex justify-center g-12 ">
+                  <button
+                    value={item.id}
+                    onClick={(e) =>
+                      handleEditButton(e.currentTarget.value, item.nome)
+                    }
+                  >
+                    Editar
+                  </button>
+                  <button
+                    value={item.id}
+                    onClick={(e) =>
+                      handleConfirmDeleteButton(e.currentTarget.value)
+                    }
+                  >
+                    Deletar
+                  </button>
+                </div>
               </div>
-              <div className="flex justify-center g-12 ">
-                <button value={item.id} onClick={(e) => handleEditButton(e.currentTarget.value,item.nome)}>
-                  Editar
-                </button>
-                <button
-                  value={item.id}
-                  onClick={(e) =>
-                    handleConfirmDeleteButton(e.currentTarget.value)
-                  }
-                >
-                  Deletar
-                </button>
-              </div>
-            </div>
+            </>
           ))}
-        {isOpen && <Form onClose={closeModal} onSubmit={handleSubmit} initialValue={nameEditing}></Form>}
+        {isOpen && (
+          <Form
+            onClose={closeModal}
+            onSubmit={handleSubmitEdit}
+            initialValue={nameEditing}
+          ></Form>
+        )}
         {modalConfirmDelete && (
           <div className="modal-overlay">
             <div className="modal-container">
@@ -172,7 +202,10 @@ const Grid = ({ search }: { search: string }) => {
           </div>
         )}
         {notificationOpen && (
-          <Notification message={messageNotification}></Notification>
+          <Notification
+            message={messageNotification}
+            type={typeNotification}
+          ></Notification>
         )}
       </div>
     </>
