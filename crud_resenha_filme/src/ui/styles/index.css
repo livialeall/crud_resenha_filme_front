@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('../styles/modal.css');
 @import url('../styles/grid.css');
+@import url('../styles/notification.css');
 /* Resetar estilos */
 * {
   margin: 0;
@@ -149,6 +150,7 @@ textarea {
   background: white;
   font-family: inherit;
   color: var(--gray-1);
+  
 }
 
 body {
