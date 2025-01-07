@@ -3,11 +3,9 @@
     background-color: aliceblue;
     padding: 12px 12px;
     grid-template-columns: 1.5fr 2.5fr 1fr 1fr;
-    grid-template-rows: 1fr;
     margin-bottom: 8px;
     text-align: center;
     border-radius: 6px;
-    overflow: hidden;
     align-items: center;
 }
 

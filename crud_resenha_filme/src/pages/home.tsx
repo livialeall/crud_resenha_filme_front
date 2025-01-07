@@ -43,7 +43,7 @@ const Home = () => {
     setNotificationOpen(true)
     if (response == 200) {
       setNotificationType("sucess");
-      setNotificationMessage("Sua resenha foi criado com sucesso");
+      setNotificationMessage("Sua resenha foi criada com sucesso");
     } else {
       setNotificationType("error");
       setNotificationMessage("Houve um problema para criar sua resenha");
@@ -51,6 +51,7 @@ const Home = () => {
   };
 
   return (
+    <>
     <div className="g-24 component-div">
       <div className="g-24 align-center">
         <h1>Resenha de Filmes</h1>
@@ -67,7 +68,7 @@ const Home = () => {
           onChange={(e) => setSearchItem(e.target.value)}
         />
       </div>
-      <Grid search={searchItem}></Grid>
+      <Grid search={searchItem} handleNotification={setNotificationOpen} messageNotification={setNotificationMessage} typeNotification={setNotificationType}></Grid>
       {isOpen && (
         <Form
           onClose={closeModal}
@@ -75,13 +76,14 @@ const Home = () => {
           initialValue={""}
         ></Form>
       )}
-      {notificationOpen && (
-        <Notification
-          message={messageNotification}
-          type={typeNotification}
-        ></Notification>
-      )}
     </div>
+    {notificationOpen && (
+      <Notification
+        message={messageNotification}
+        type={typeNotification}
+      ></Notification>
+    )}
+    </>
   );
 };
 

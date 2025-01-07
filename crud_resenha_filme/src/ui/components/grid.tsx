@@ -9,15 +9,13 @@ import {
 } from "../../data/reviews.tsx";
 import Form from "./form.tsx";
 
-const Grid = ({ search }: { search: string }) => {
+const Grid = ({ search,handleNotification,messageNotification,typeNotification}) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [notificationOpen, setNotificationOpen] = useState(false);
-  const [typeNotification, setNotificationType] = useState("");
   const [itemToBeDeleted, setItemToBeDeleted] = useState<Review>();
   const headers = ["Nome do Filme", "Resenha", "Nota", "Ações"];
   const limit = 5;
   const { data, error, loading } = useGetReviews();
-  const [messageNotification, setNotificationMessage] = useState("");
   const [modalConfirmDelete, setModalConfirmDelete] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [valueEditing, setValueEditing] = useState("");
@@ -38,7 +36,7 @@ const Grid = ({ search }: { search: string }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setNotificationOpen(false); // Altera o estado para esconder o componente
-    }, 4000); // 10 segundos em milissegundos (10000ms)
+    }, 40000); // 10 segundos em milissegundos (10000ms)
 
     return () => clearTimeout(timer);
   }, [notificationOpen]);
@@ -61,14 +59,13 @@ const Grid = ({ search }: { search: string }) => {
 
   const handleDeleteButton = async (id: string) => {
     const response = await deleteReviews(Number(id));
-    setNotificationOpen(true);
-    console.log("Abriu a notificação")
+    handleNotification(true)
     setModalConfirmDelete(false);
     closeModal();
     if (response == 200) {
-      setNotificationMessage("Resenha deletada com sucesso!");
+      messageNotification("Resenha deletada com sucesso!")
     } else {
-      setNotificationMessage("Ocorreu um erro ao deletar sua resenha.");
+      messageNotification("Ocorreu um erro ao deletar sua resenha.")
     }
   };
 
@@ -97,14 +94,13 @@ const Grid = ({ search }: { search: string }) => {
 
     const response = await updateReviews(data);
     closeModal();
-    console.log("Abriu a notificação")
-    setNotificationOpen(true);
+    handleNotification(true)
     if (response == 200) {
-      setNotificationType("sucess");
-      setNotificationMessage("Sua resenha foi editada com sucesso");
+      typeNotification("sucess");
+      messageNotification("Sua resenha foi editada com sucesso");
     } else {
-      setNotificationType("error");
-      setNotificationMessage("Houve um problema para editar sua resenha");
+      typeNotification("error");
+      messageNotification("Houve um problema para editar sua resenha");
     }
   };
 
@@ -200,12 +196,6 @@ const Grid = ({ search }: { search: string }) => {
           <div className="justify-center align-center font-size-18">
             Não foram encontradas resenhas
           </div>
-        )}
-        {notificationOpen && (
-          <Notification
-            message={messageNotification}
-            type={typeNotification}
-          ></Notification>
         )}
       </div>
     </>
