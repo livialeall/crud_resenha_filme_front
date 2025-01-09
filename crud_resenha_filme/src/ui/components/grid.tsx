@@ -133,6 +133,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
                 <div>{item.nota}</div>
                 <div className="flex justify-center g-12 ">
                   <button
+                  className="edit-button"
                     value={item.id}
                     onClick={(e) =>
                       handleEditButton(e.currentTarget.value, item.nome)
@@ -141,6 +142,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
                     Editar
                   </button>
                   <button
+                  className="delete-button subbutton-hover"
                     value={item.id}
                     onClick={(e) =>
                       handleConfirmDeleteButton(e.currentTarget.value)
@@ -170,10 +172,11 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
                 <button
                   value={itemToBeDeleted?.id}
                   onClick={(e) => handleDeleteButton(e.currentTarget.value)}
+                  className="active"
                 >
                   Confirmar
                 </button>
-                <button onClick={() => setModalConfirmDelete(false)}>
+                <button onClick={() => setModalConfirmDelete(false)} className="subbutton-hover">
                   Cancelar
                 </button>
               </div>
@@ -182,7 +185,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
         )}
         {searchedData.length > 0 && (error?.message.length == 0 || !loading) ? (
           <div className="flex justify-between align-center">
-            <div>
+            <div className="subtext">
               Mostrando {paginatedData.length} de {searchedData.length}{" "}
               avaliações
             </div>

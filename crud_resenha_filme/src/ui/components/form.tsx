@@ -29,10 +29,10 @@ const Form = ({ onClose, onSubmit, initialValue }) => {
             <input type="text" name="nota" />
           </label>
           <div className="flex g-12">
-            <button type="submit" className="rounded-3 shadow-lighter">
+            <button type="submit" className="rounded-3 active">
               Confirma
             </button>
-            <button className="rounded-3 shadow-lighter" onClick={onClose}>
+            <button className="rounded-3 shadow-lighter subbutton-hover" onClick={onClose}>
               Fechar
             </button>
           </div>
