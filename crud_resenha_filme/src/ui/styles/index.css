@@ -114,10 +114,14 @@ h1{
   font-family: "Roboto", system-ui;
   font-weight: 500;
   font-style: normal;
-  font-size: 2.5em;
-  margin: 2% 0px;
+  font-size: x-large;
+  display: inline-block;
+            margin: 0;
+            padding: 0;
+  padding: 0%;
   color: var(--soft-white);
   text-shadow: 1px 1px 5px rgba(94, 94, 94, 0.089);
+  line-height: 1;
 }
 /* Variáveis */
 :root {
@@ -159,8 +163,7 @@ textarea {
 input:focus{
   outline: none; 
   border: none;
-  box-shadow: 0 0 1px 1px var(--purple-0), 
-              0 0 1px 1px var(--purple-3); 
+  box-shadow: 0 0 1px 3px rgba(128, 8, 8, 0.986)
 }
 
 body {
@@ -277,6 +280,10 @@ h2{
   display: flex;
   align-items: baseline;
 }
+
+.align-self-end{
+  align-self:last baseline;
+}
 .justify-center{
   justify-content: center;
 }
@@ -338,7 +345,7 @@ h2{
   width:  8px; /* Largura da esfera */
   height: 8px; /* Altura da esfera */
   border-radius: 50%; 
-  background: linear-gradient(to right,var(--purple-1),var(--purple-2));
+  background: linear-gradient(to right,var(--purple-0),var(--purple-1));
 
 }
 /* Margens,paddings e espaços */
@@ -398,9 +405,8 @@ h2{
 }
 
 .m-top-12{
-  margin-top: 16%;
+  margin-top: 12px;
 }
-
 button{
   background-color: #414040;
   color: var(--soft-white);
