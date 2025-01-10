@@ -63,8 +63,10 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
     setModalConfirmDelete(false);
     closeModal();
     if (response == 200) {
+      typeNotification("sucess");
       messageNotification("Resenha deletada com sucesso!")
     } else {
+      typeNotification("erro")
       messageNotification("Ocorreu um erro ao deletar sua resenha.")
     }
   };
@@ -99,7 +101,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
       typeNotification("sucess");
       messageNotification("Sua resenha foi editada com sucesso");
     } else {
-      typeNotification("error");
+      typeNotification("erro");
       messageNotification("Houve um problema para editar sua resenha");
     }
   };
@@ -131,7 +133,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
                 <div>{item.nome}</div>
                 <div>{item.resenha}</div>
                 <div>{item.nota}</div>
-                <div className="flex justify-center g-12 ">
+                <div className="flex justify-center g-12 wrap">
                   <button
                   className="edit-button"
                     value={item.id}
@@ -142,7 +144,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
                     Editar
                   </button>
                   <button
-                  className="delete-button subbutton-hover"
+                  className="delete-button"
                     value={item.id}
                     onClick={(e) =>
                       handleConfirmDeleteButton(e.currentTarget.value)

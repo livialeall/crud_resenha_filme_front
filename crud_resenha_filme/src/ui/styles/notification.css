@@ -1,12 +1,11 @@
 
 .notification-container {
-    background-color: #1f1e1e;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 400px;
     padding: 20px;
-    color: aliceblue;
+    font-size:small 
   }
 
   .notification-overlay {
@@ -16,3 +15,13 @@
     margin-top: -60px; /* margem do component-div */
     margin-bottom: 10px;
   }
+
+.erro{
+  background-color: rgba(241, 117, 117, 0.685);
+  color: rgb(70, 6, 6);
+}
+
+.sucess{
+  background-color: rgba(126, 223, 126, 0.39);
+  color: rgb(4, 41, 4);
+}

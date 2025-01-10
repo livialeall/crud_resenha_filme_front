@@ -35,3 +35,8 @@
     color: var(--soft-white);
 }
 
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+

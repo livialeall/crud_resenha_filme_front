@@ -45,7 +45,7 @@ const Home = () => {
       setNotificationType("sucess");
       setNotificationMessage("Sua resenha foi criada com sucesso");
     } else {
-      setNotificationType("error");
+      setNotificationType("erro");
       setNotificationMessage("Houve um problema para criar sua resenha");
     }
   };
@@ -53,10 +53,9 @@ const Home = () => {
   return (
     <>
     <div className="g-24 component-div">
-      <div className="g-24 align-center">
-        <h1>Resenha de Filmes</h1>
+      <div className="g-24 align-stretch m-6">
         <button onClick={openModal} className="rounded-3 shadow-lighter active">
-          Adicionar resenha
+          Adicionar nova resenha
         </button>
         <input
           type="search"

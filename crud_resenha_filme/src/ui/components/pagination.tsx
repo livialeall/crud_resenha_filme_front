@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Review } from "../../data/reviews";
+
 interface PaginationProps {
     pagesList:number[]
     selectedPageNumber:number

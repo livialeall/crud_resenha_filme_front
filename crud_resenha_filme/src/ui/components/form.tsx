@@ -12,7 +12,7 @@ const Form = ({ onClose, onSubmit, initialValue }) => {
         <h2>Adicione sua resenha</h2>
         <form action="POST" className="flex-column" onSubmit={onSubmit}>
           <label>
-            Filme:
+            <div className="label">Filme</div>
             <input
               type="text"
               name="nome"
@@ -21,12 +21,12 @@ const Form = ({ onClose, onSubmit, initialValue }) => {
             />
           </label>
           <label>
-            Sua Resenha:
+            <div className="label">Resenha</div>
             <input type="text" name="resenha" />
           </label>
-          <label>
-            Sua nota:
-            <input type="text" name="nota" />
+          <label className="label">
+            <div>Nota</div>
+            <input type="numeric" name="nota" />
           </label>
           <div className="flex g-12">
             <button type="submit" className="rounded-3 active">
