@@ -59,7 +59,7 @@ const Home = () => {
     <div className="g-24 component-div">
       <div className="g-24 align-stretch m-6">
         <button onClick={openModal} className="rounded-3 shadow-lighter active">
-          Adicionar nova resenha
+          Adicionar resenha
         </button>
         <input
           type="search"
