@@ -1,18 +1,42 @@
+
+:root {
+    --purple-4-light: #8163ee70;
+    --purple-3: rgb(248, 97, 97);
+    --purple-2: rgb(235, 77, 77);
+    --purple-1: #d43939;
+    --purple-0: #be2424;
+    --gray-0: #020202;
+    --gray-1:#202020;
+    --gray-2:#333333;
+    --gray-3:#4d4d4d;
+    --gray-4:#636363;
+    --gray-5:#aaaaaafb;
+    --gray-6:#c9c9c9;
+    --gray-7:#dbdbdb;
+    --soft-white:rgb(221, 221, 221);
+    --proporcao-foto:1,196;
+    --padding-container:20px;
+  }
+
 .grid{
     display: grid;
-    background-color: aliceblue;
+    background-color: var(--gray-3);
     padding: 12px 12px;
     grid-template-columns: 1.5fr 2.5fr 1fr 1fr;
-    grid-template-rows: 1fr;
     margin-bottom: 8px;
     text-align: center;
     border-radius: 6px;
-    overflow: hidden;
     align-items: center;
+    color: var(--soft-white);
 }
 
 .header{
-    background-color: rgb(152, 153, 153);
-    color: white;
+    background-color: var(--gray-2);
+    color: var(--soft-white);
+}
+
+.wrap {
+    display: flex;
+    flex-wrap: wrap;
 }
 
