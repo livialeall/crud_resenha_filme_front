@@ -117,12 +117,12 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
       </div>
       <div>
         {loading && (
-          <div className="justify-center align-center font-size-18">
+          <div className="message-inform">
             Carregando...
           </div>
         )}
         {error && (
-          <div className="justify-center align-center font-size-18">
+          <div className="message-inform">
             Poxa, tivemos um erro para buscar as resenhas.
           </div>
         )}
@@ -198,7 +198,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
             ></Pagination>
           </div>
         ) : loading || error?.message ? null : (
-          <div className="justify-center align-center font-size-18 message-inform">
+          <div className="message-inform">
             Não foram encontradas resenhas
           </div>
         )}
