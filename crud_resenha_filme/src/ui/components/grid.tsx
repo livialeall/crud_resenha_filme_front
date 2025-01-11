@@ -198,7 +198,7 @@ const Grid = ({ search,handleNotification,messageNotification,typeNotification})
             ></Pagination>
           </div>
         ) : loading || error?.message ? null : (
-          <div className="justify-center align-center font-size-18">
+          <div className="justify-center align-center font-size-18 message-inform">
             Não foram encontradas resenhas
           </div>
         )}

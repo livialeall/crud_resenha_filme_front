@@ -53,7 +53,7 @@ const Home = () => {
   return (
     <>
     <div className="flex align-center g-6 m-top-12">
-      <h1>sua resenha</h1>
+      <h1 className="align-self-end">sua resenha</h1>
       <div className="circle align-self-end"></div>
     </div>
     <div className="g-24 component-div">

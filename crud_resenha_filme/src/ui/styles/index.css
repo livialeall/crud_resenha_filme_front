@@ -282,6 +282,7 @@ h2{
 }
 
 .align-self-end{
+  display: flex;
   align-self:last baseline;
 }
 .justify-center{
@@ -480,4 +481,11 @@ form label:nth-child(1){
 
 form label:nth-child(2){
   margin: 8px 0px;
+}
+.message-inform{
+  display: flex;
+  justify-content: align-center;
+  font-size:18px;
+  margin: 2% 0px;
+  color: var(--soft-white);
 }
